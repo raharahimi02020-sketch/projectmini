@@ -14,7 +14,14 @@ export const loadPersistentState = (telegramUser?: TelegramUserProfile): Persist
 
     const parsed = JSON.parse(raw) as PersistentState
 
-    if (!parsed || !parsed.profile || !Array.isArray(parsed.plans) || !Array.isArray(parsed.services) || !Array.isArray(parsed.orders)) {
+    // اصلاح شرط با || و جلوگیری از Syntax Error
+    if (
+      !parsed ||
+      !parsed.profile ||
+      !Array.isArray(parsed.plans) ||
+      !Array.isArray(parsed.services) ||
+      !Array.isArray(parsed.orders)
+    ) {
       return fallback
     }
 
@@ -29,7 +36,11 @@ export const loadPersistentState = (telegramUser?: TelegramUserProfile): Persist
         avatarUrl: telegramUser?.photo_url ?? parsed.profile.avatarUrl,
         premium: telegramUser?.is_premium ?? parsed.profile.premium,
       },
-      customers: (parsed.customers ?? []).map((c) => ({ walletCredit: 0, ...c })),
+      // اصلاح walletCredit تا دوبار تعریف نشه
+      customers: (parsed.customers ?? []).map((c) => ({
+        ...c,
+        walletCredit: c.walletCredit ?? 0,
+      })),
     }
   } catch {
     return fallback
