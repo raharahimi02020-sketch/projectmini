@@ -1,12 +1,6 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "target": "es2022",
-    "lib": ["DOM", "ES2022"],
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" }
+  ]
 }
