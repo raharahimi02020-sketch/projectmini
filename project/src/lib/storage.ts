@@ -14,7 +14,6 @@ export const loadPersistentState = (telegramUser?: TelegramUserProfile): Persist
 
     const parsed = JSON.parse(raw) as PersistentState
 
-    // اصلاح شرط با || و جلوگیری از Syntax Error
     if (
       !parsed ||
       !parsed.profile ||
@@ -36,7 +35,6 @@ export const loadPersistentState = (telegramUser?: TelegramUserProfile): Persist
         avatarUrl: telegramUser?.photo_url ?? parsed.profile.avatarUrl,
         premium: telegramUser?.is_premium ?? parsed.profile.premium,
       },
-      // اصلاح walletCredit تا دوبار تعریف نشه
       customers: (parsed.customers ?? []).map((c) => ({
         ...c,
         walletCredit: c.walletCredit ?? 0,
