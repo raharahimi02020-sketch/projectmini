@@ -6,8 +6,8 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
-    "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
+    "jsx": "react-jsx"
+    // allowImportingTsExtensions حذف شد
   },
   "include": ["src"]
 }
